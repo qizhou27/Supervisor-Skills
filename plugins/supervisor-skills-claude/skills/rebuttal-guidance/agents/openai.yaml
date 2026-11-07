@@ -1,0 +1,4 @@
+interface:
+  display_name: Supervisor-Skills · rebuttal-guidance
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,4 @@
+interface:
+  display_name: Supervisor-Skills · tech-paper-template
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,14 @@
+{
+  "name": "supervisor-skills-local",
+  "interface": {
+    "displayName": "Supervisor-Skills personal fork"
+  },
+  "plugins": [
+    {
+      "name": "supervisor-skills",
+      "source": {"source": "local", "path": "./plugins/supervisor-skills"},
+      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+      "category": "Productivity"
+    }
+  ]
+}

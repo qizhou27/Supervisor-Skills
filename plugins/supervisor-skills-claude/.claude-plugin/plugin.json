@@ -1,0 +1,10 @@
+{
+  "name": "supervisor-skills",
+  "version": "1.0.0",
+  "author": {
+    "name": "HKUSTDial"
+  },
+  "description": "Supervisor-Skills research workflows; invoke skills explicitly.",
+  "homepage": "https://github.com/HKUSTDial/Supervisor-Skills",
+  "license": "CC-BY-NC-SA-4.0"
+}
