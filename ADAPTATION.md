@@ -19,11 +19,13 @@ codex plugin add supervisor-skills@supervisor-skills-local
 
 首次转换已注册的本地来源前保留原配置。如果 CLI 拒绝同名来源，先确认旧目录，再仅移除 marketplace 注册并添加 Git 来源；旧源码保留用于恢复。客户端仍需刷新 Git marketplace 才能获取已经合并的版本。
 
+若桌面界面仍将 Upgrade 禁用，在 Marketplace → Add 再次提交同一 Git 地址，看到已添加提示后返回列表，确认按钮可用。此操作刷新应用内来源状态。
+
 ## 上游同步
 
-**Check upstream** 每天计划在新加坡时间 09:23 检查一次，GitHub 可能延迟执行，也可手动触发。三方合并以 `.upstream/state.json` 的提交为共同基线，保留个人适配；没有内容变化时不创建 PR。同步成功时递增包装版本，并同步两个 manifest 与 Claude marketplace 版本。
+**Check upstream** 每天计划在新加坡时间 09:23 只读检查一次，GitHub 可能延迟执行，也可手动触发。三方合并以 `.upstream/state.json` 的提交为共同基线。云端只将提交、变更数量和冲突写入运行摘要，job 仅有 `contents: read`，不需要 Actions 创建或批准 PR 的仓库权限。
 
-工作流只创建 PR，不自动合并或安装。上游明确删除的文件和技能会跟随删除；文本交叠或二进制冲突会生成 `[blocked]` PR，此时插件内容和同步基线保持原样。`.upstream/INCOMING.patch` 存在时验证必须失败。自动维护需解决冲突、保留调用边界、更新版本和基线，再移除该补丁并重跑检查。
+本地 Codex 维护以最新上游创建候选 PR，成功同步时递增包装版本并同步两个 manifest 与 marketplace。上游明确删除的文件和技能会跟随删除；文本交叠或二进制冲突生成报告，此时插件内容和同步基线保持原样。`.upstream/INCOMING.patch` 存在时验证必须失败。自动维护需解决冲突、保留调用边界、更新版本和基线，再移除该补丁并重跑检查。
 
 本账号的 Codex 日常维护在新加坡时间 09:40 自动审阅、补齐双端适配、验证并发布常规更新到 `main`，使客户端 Upgrade 可以获取新版。技能集合跟随上游，新增技能须自动补齐显式调用策略。此维护需要本地 Codex 可运行；无法验证的变更保留当前稳定版并报告。
 
