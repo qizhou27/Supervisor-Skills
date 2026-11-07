@@ -1,16 +1,11 @@
 ---
 name: pre-submission-reviewer
-description: >-
-  Runs a pre-submission review of a technical paper across five
-  dimensions: macro logic, writing details, English grammar, LaTeX
-  formatting, and figure quality. Uses a reviewer-style severity
-  taxonomy (CRITICAL / MAJOR / MINOR) and flags banned AI-tone
-  vocabulary and em-dash misuse. Use when the user asks to 'review
-  this paper', 'audit before submission', 'check the draft', 'find
-  issues', 'proofread', or within one week of a submission
-  deadline.
+description: "Explicit invocation only: use when the user names pre-submission-reviewer or explicitly requests Supervisor-Skills for this task. Runs a pre-submission review of a technical paper across five dimensions: macro logic, writing details, English grammar, LaTeX formatting, and figure quality. Uses a reviewer-style severity taxonomy (CRITICAL / MAJOR / MINOR) and flags banned AI-tone vocabulary and em-dash misuse. Use when the user asks to 'review this paper', 'audit before submission', 'check the draft', 'find issues', 'proofread', or within one week of a submission deadline."
 license: CC-BY-4.0
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Pre-Submission Reviewer
 

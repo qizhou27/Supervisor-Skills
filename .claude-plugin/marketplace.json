@@ -7,7 +7,7 @@
       "name": "supervisor-skills",
       "source": "./plugins/supervisor-skills-claude",
       "description": "Research skills with explicit invocation in Codex and Claude Code",
-      "version": "1.0.0"
+      "version": "1.0.1"
     }
   ]
 }

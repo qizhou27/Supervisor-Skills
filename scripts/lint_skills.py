@@ -189,7 +189,16 @@ def lint_skill(skill_dir: Path) -> list[str]:
     elif not isinstance(fm["description"], str):
         errors.append(f"{skill_md}: frontmatter 'description' must be a string")
     else:
-        errors.extend(f"{skill_md}: {e}" for e in check_description(fm["description"]))
+        # The personal fork adds a separately validated invocation boundary.
+        # Keep upstream's original word-count and prose checks on its description.
+        description = fm["description"]
+        prefix = (
+            f"Explicit invocation only: use when the user names {skill_dir.name} "
+            "or explicitly requests Supervisor-Skills for this task. "
+        )
+        if description.startswith(prefix):
+            description = description[len(prefix):]
+        errors.extend(f"{skill_md}: {e}" for e in check_description(description))
 
     errors.extend(f"{skill_md}: {e}" for e in check_body(body))
     errors.extend(f"{skill_md}: {e}" for e in check_pointers(skill_dir, body))

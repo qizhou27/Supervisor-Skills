@@ -1,0 +1,32 @@
+{
+  "repository": "https://github.com/HKUSTDial/Supervisor-Skills.git",
+  "branch": "main",
+  "commit": "4bd3fef393e5ffc891c74309a5ef6c5ad3ad12c8",
+  "mappings": [
+    {
+      "source": "",
+      "target": ".",
+      "track_skills": true,
+      "follow_upstream_removals": true,
+      "version_files": [
+        ".codex-plugin/plugin.json",
+        ".claude-plugin/marketplace.json",
+        "ADAPTATION.md"
+      ],
+      "skills": [
+        "benchmark-paper-template",
+        "deep-research",
+        "drawio-reconstruction",
+        "figure-designer",
+        "idea-evaluator",
+        "intro-drafter",
+        "paper-polish",
+        "paper-writer",
+        "pre-submission-reviewer",
+        "rebuttal-guidance",
+        "tech-paper-template",
+        "vibe-research-workflow"
+      ]
+    }
+  ]
+}

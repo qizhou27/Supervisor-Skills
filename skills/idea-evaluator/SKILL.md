@@ -1,16 +1,11 @@
 ---
 name: idea-evaluator
-description: >-
-  Evaluates a preliminary research idea against a five-dimension framework
-  (Higher, Faster, Stronger, Cheaper, Broader) plus idea-lifecycle and
-  student-capability matching, paradigm-shift probing, and a fatal-flaws
-  audit. Returns a reviewer-style verdict; non-STEM ideas route to
-  substitute frameworks. Use when the user has a draft research idea and
-  asks whether it is worth pursuing, asks to 'evaluate this idea', 'score
-  this idea', 'assess feasibility', 'novelty check', 'is this a good
-  research direction', or before committing to a paper scope.
+description: "Explicit invocation only: use when the user names idea-evaluator or explicitly requests Supervisor-Skills for this task. Evaluates a preliminary research idea against a five-dimension framework (Higher, Faster, Stronger, Cheaper, Broader) plus idea-lifecycle and student-capability matching, paradigm-shift probing, and a fatal-flaws audit. Returns a reviewer-style verdict; non-STEM ideas route to substitute frameworks. Use when the user has a draft research idea and asks whether it is worth pursuing, asks to 'evaluate this idea', 'score this idea', 'assess feasibility', 'novelty check', 'is this a good research direction', or before committing to a paper scope."
 license: CC-BY-4.0
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Idea Evaluator
 

@@ -1,16 +1,11 @@
 ---
 name: figure-designer
-description: >-
-  Advises on the design of the three core figures in a technical paper:
-  the Motivated Example (Figure 1), the Solution Overview
-  (Methodology), and the Experimental Results figures. Recommends the
-  right design paradigm, layout, labelling, and tool for each figure
-  type, then runs a quality-control audit. Use when the user asks to
-  'design a figure', 'draw Figure 1', 'plot experiment results',
-  'choose the right chart type', 'which figure tool to use', or
-  'figure looks unprofessional'.
+description: "Explicit invocation only: use when the user names figure-designer or explicitly requests Supervisor-Skills for this task. Advises on the design of the three core figures in a technical paper: the Motivated Example (Figure 1), the Solution Overview (Methodology), and the Experimental Results figures. Recommends the right design paradigm, layout, labelling, and tool for each figure type, then runs a quality-control audit. Use when the user asks to 'design a figure', 'draw Figure 1', 'plot experiment results', 'choose the right chart type', 'which figure tool to use', or 'figure looks unprofessional'."
 license: CC-BY-4.0
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Figure Designer
 

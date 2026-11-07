@@ -1,0 +1,4 @@
+interface:
+  display_name: Supervisor-Skills · vibe-research-workflow
+policy:
+  allow_implicit_invocation: false

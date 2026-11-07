@@ -1,15 +1,11 @@
 ---
 name: intro-drafter
-description: >-
-  Drafts the Introduction prose for a technical paper, guided internally by
-  a six-paragraph flowchart: background and running example, existing
-  limitations, problem essence and goal, key challenges, solution overview,
-  contributions. Positions the paper as Technique or New Problem/Setting,
-  aligns contributions with challenges, and weaves verified citations.
-  Outputs flowing prose by default, or an outline on request. Use when the
-  user asks to draft, outline, or restructure an Introduction.
+description: "Explicit invocation only: use when the user names intro-drafter or explicitly requests Supervisor-Skills for this task. Drafts the Introduction prose for a technical paper, guided internally by a six-paragraph flowchart: background and running example, existing limitations, problem essence and goal, key challenges, solution overview, contributions. Positions the paper as Technique or New Problem/Setting, aligns contributions with challenges, and weaves verified citations. Outputs flowing prose by default, or an outline on request. Use when the user asks to draft, outline, or restructure an Introduction."
 license: CC-BY-NC-SA-4.0
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Introduction Drafter
 

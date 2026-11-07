@@ -1,0 +1,4 @@
+interface:
+  display_name: Supervisor-Skills · paper-writer
+policy:
+  allow_implicit_invocation: false

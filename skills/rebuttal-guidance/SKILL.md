@@ -1,13 +1,10 @@
 ---
 name: rebuttal-guidance
-description: >-
-  Provides actionable peer-review rebuttal guidance (not full rebuttal prose)
-  using conditional persuasion P(Z|X,Y): match reviewer mindset X, recommend
-  strategy Y, optionally ground in manuscript evidence and similar successful
-  historical (review, rebuttal) pairs. Use when the user pastes reviewer
-  comments, asks for rebuttal help, rebuttal guidance, response to reviewers,
-  how to reply to R1.W2, OpenReview rebuttal, or the reviewer ignored the rebuttal.
+description: "Explicit invocation only: use when the user names rebuttal-guidance or explicitly requests Supervisor-Skills for this task. Provides actionable peer-review rebuttal guidance (not full rebuttal prose) using conditional persuasion P(Z|X,Y): match reviewer mindset X, recommend strategy Y, optionally ground in manuscript evidence and similar successful historical (review, rebuttal) pairs. Use when the user pastes reviewer comments, asks for rebuttal help, rebuttal guidance, response to reviewers, how to reply to R1.W2, OpenReview rebuttal, or the reviewer ignored the rebuttal."
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Rebuttal Guidance
 
