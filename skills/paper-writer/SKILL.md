@@ -1,15 +1,11 @@
 ---
 name: paper-writer
-description: >-
-  Drafts publishable paper prose from the author's own materials, from a
-  single paragraph to a full manuscript, across STEM and non-STEM fields.
-  Every factual claim traces to user input, verified retrieval, or field
-  common knowledge; citations pass an independent verification ladder;
-  delivery is clean prose with zero placeholder tags. Use when the user asks
-  to write a section, turn an idea or results into paper text, or draft a
-  full paper.
+description: "Explicit invocation only: use when the user names paper-writer or explicitly requests Supervisor-Skills for this task. Drafts publishable paper prose from the author's own materials, from a single paragraph to a full manuscript, across STEM and non-STEM fields. Every factual claim traces to user input, verified retrieval, or field common knowledge; citations pass an independent verification ladder; delivery is clean prose with zero placeholder tags. Use when the user asks to write a section, turn an idea or results into paper text, or draft a full paper."
 license: CC-BY-NC-SA-4.0
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Paper Writer
 

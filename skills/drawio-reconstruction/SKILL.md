@@ -1,7 +1,10 @@
 ---
 name: drawio-reconstruction
-description: "Reconstructs reference images into high-fidelity, editable Draw.io files with rendered previews: native Draw.io elements carry text and structure, SVG covers simple icons that match the reference, and cropped or transparent PNGs preserve complex visuals. Use when the user wants a diagram image, research figure, architecture diagram, slide, UI screenshot, or image folder turned into `.drawio` XML; batch requests use a manifest with bounded parallelism when available and a full-fidelity serial fallback otherwise."
+description: "Explicit invocation only: use when the user names drawio-reconstruction or explicitly requests Supervisor-Skills for this task. Reconstructs reference images into high-fidelity, editable Draw.io files with rendered previews: native Draw.io elements carry text and structure, SVG covers simple icons that match the reference, and cropped or transparent PNGs preserve complex visuals. Use when the user wants a diagram image, research figure, architecture diagram, slide, UI screenshot, or image folder turned into `.drawio` XML; batch requests use a manifest with bounded parallelism when available and a full-fidelity serial fallback otherwise."
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Draw.io Reconstruction
 

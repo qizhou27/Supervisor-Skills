@@ -1,0 +1,12 @@
+{
+  "name": "supervisor-skills",
+  "version": "1.0.1",
+  "author": {"name": "HKUSTDial"},
+  "description": "Personal Codex and Claude packaging of Supervisor-Skills with explicit invocation required.",
+  "skills": "./skills/",
+  "homepage": "https://github.com/HKUSTDial/Supervisor-Skills",
+  "interface": {
+    "displayName": "Supervisor-Skills",
+    "shortDescription": "Research skills with explicit invocation"
+  }
+}

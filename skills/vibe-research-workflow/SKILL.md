@@ -1,16 +1,11 @@
 ---
 name: vibe-research-workflow
-description: >-
-  Guides AI-assisted research across three sub-flows, Vibe Coding,
-  Vibe Figure, and Vibe Writing, with behavioural rules that keep the
-  user in charge of academic judgment while delegating mechanical
-  work to AI. Recommends the right tool (Cursor, Claude Code, Codex,
-  Figma, Gemini) for the current stage. Use when the user asks 'how
-  to use AI for research', 'Vibe Coding tips', 'AI-assisted writing
-  workflow', 'which AI tool for this', or starts an AI-assisted work
-  session.
+description: "Explicit invocation only: use when the user names vibe-research-workflow or explicitly requests Supervisor-Skills for this task. Guides AI-assisted research across three sub-flows, Vibe Coding, Vibe Figure, and Vibe Writing, with behavioural rules that keep the user in charge of academic judgment while delegating mechanical work to AI. Recommends the right tool (Cursor, Claude Code, Codex, Figma, Gemini) for the current stage. Use when the user asks 'how to use AI for research', 'Vibe Coding tips', 'AI-assisted writing workflow', 'which AI tool for this', or starts an AI-assisted work session."
 license: CC-BY-4.0
 ---
+
+Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly invokes this skill or requests Supervisor-Skills for the current task. References to sibling skills do not authorize implicit activation.
+
 
 # Vibe Research Workflow
 

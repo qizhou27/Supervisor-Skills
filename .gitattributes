@@ -1,0 +1,2 @@
+# Preserve generated host-package bytes on every host.
+* -text

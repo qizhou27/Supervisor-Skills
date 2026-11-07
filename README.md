@@ -6,6 +6,10 @@
 
 # Supervisor-Skills: 将博导十年科研经验，炼化为你的 AI 副导师。
 
+> 个人 fork 的 Codex / Claude 安装、显式调用设置和上游更新方式见 [ADAPTATION.md](ADAPTATION.md)。下文保留上游介绍。
+
+Claude Code 安装：`/plugin install supervisor-skills --marketplace qizhou27/Supervisor-Skills`
+
 [English](README.en.md) · 中文
 
 <p align="center">

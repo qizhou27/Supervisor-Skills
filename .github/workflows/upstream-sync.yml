@@ -1,0 +1,94 @@
+name: Check upstream
+
+on:
+  schedule:
+    - cron: '23 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: upstream-sync
+  cancel-in-progress: false
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Fetch upstream baseline and latest commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          url=$(python -I -c 'import json; print(json.load(open(".upstream/state.json"))["repository"])')
+          base=$(python -I -c 'import json; print(json.load(open(".upstream/state.json"))["commit"])')
+          ref=$(python -I -c 'import json; print(json.load(open(".upstream/state.json"))["branch"])')
+          git remote add plugin-upstream "$url"
+          git fetch --no-tags --depth=1 plugin-upstream "$base" "$ref"
+          echo "UPSTREAM_SHA=$(git rev-parse "refs/remotes/plugin-upstream/$ref")" >> "$GITHUB_ENV"
+      - name: Install trusted generator dependency before merging
+        run: python -I -m pip install -r requirements-lint.txt
+      - name: Merge while retaining host adaptations
+        id: merge
+        continue-on-error: true
+        run: python -I scripts/sync_upstream.py "$UPSTREAM_SHA"
+      - name: Regenerate isolated host packages
+        if: steps.merge.outcome == 'success'
+        run: python -I scripts/build_plugins.py
+      - name: Publish a reviewable pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MERGE_OUTCOME: ${{ steps.merge.outcome }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$MERGE_OUTCOME" != success && ! -f .upstream/INCOMING.patch ]]; then
+            exit 1
+          fi
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo 'No upstream plugin changes.'
+            exit 0
+          fi
+          branch="automation/upstream-${UPSTREAM_SHA:0:12}"
+          gh auth setup-git
+          ensure_validation() {
+            head=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/$branch" --jq .object.sha)
+            if [[ "$(gh run list --workflow validate.yml --branch "$branch" --commit "$head" --event workflow_dispatch --json databaseId --jq length)" == 0 ]]; then
+              gh workflow run validate.yml --ref "$branch"
+            fi
+          }
+          if [[ "$(gh pr list --state open --head "$branch" --json number --jq length)" != 0 ]]; then
+            ensure_validation
+            exit 0
+          fi
+          if [[ "$(gh pr list --state all --head "$branch" --json number --jq length)" != 0 ]]; then
+            echo 'This candidate was already merged or closed; preserve that decision.'
+            exit 0
+          fi
+          git add --all
+          branch_ref=$(git ls-remote --heads origin "refs/heads/$branch")
+          if [[ -n "$branch_ref" ]]; then
+            git fetch --no-tags origin "refs/heads/$branch"
+            if [[ "$(git write-tree)" != "$(git rev-parse 'FETCH_HEAD^{tree}')" ]]; then
+              echo 'Existing candidate differs; maintenance must reconcile it without overwriting.'
+              exit 1
+            fi
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m "chore: propose upstream ${UPSTREAM_SHA:0:12}"
+            git push origin "HEAD:refs/heads/$branch"
+          fi
+          title="chore: update upstream ${UPSTREAM_SHA:0:12}"
+          if [[ -f .upstream/INCOMING.patch ]]; then
+            title="[blocked] $title"
+          fi
+          gh pr create --base main --head "$branch" --title "$title" --body-file .upstream/REPORT.md
+          ensure_validation

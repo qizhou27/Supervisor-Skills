@@ -1,0 +1,4 @@
+interface:
+  display_name: Supervisor-Skills · intro-drafter
+policy:
+  allow_implicit_invocation: false
