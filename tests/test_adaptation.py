@@ -16,6 +16,12 @@ BUILD_SPEC.loader.exec_module(BUILD)
 
 
 class InvocationTests(unittest.TestCase):
+    def test_package_text_is_independent_of_checkout_and_binary_is_exact(self):
+        self.assertEqual(BUILD.package_bytes(b'line\r\nnext\r\n'), b'line\nnext\n')
+        self.assertEqual(BUILD.package_bytes(b'line\nnext\n'), b'line\nnext\n')
+        for binary in (b'\x89PNG\r\n\x1a\n\0payload', b'\0line\r\n', b'\xffline\r\n'):
+            self.assertEqual(BUILD.package_bytes(binary), binary)
+
     def test_new_upstream_skill_gets_explicit_policy_without_losing_workflow(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

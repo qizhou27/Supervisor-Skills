@@ -9,6 +9,18 @@ TARGETS = {'codex': ROOT / 'plugins/supervisor-skills',
            'claude': ROOT / 'plugins/supervisor-skills-claude'}
 
 
+def package_bytes(content):
+    """Canonical text prevents checkout line endings from changing host packages."""
+    if b'\0' not in content:
+        try:
+            content.decode('utf-8')
+        except UnicodeDecodeError:
+            pass
+        else:
+            return content.replace(b'\r\n', b'\n')
+    return content
+
+
 def adapt_source(root=ROOT):
     """Apply the existing explicit-only policy to newly added upstream skills."""
     boundary = ('Invocation boundary: Do not activate from task similarity alone. Use only when the user explicitly '
@@ -46,9 +58,9 @@ def expected_files(host):
                 'author': manifest['author'],
                 'description': 'Supervisor-Skills research workflows; invoke skills explicitly.',
                 'homepage': manifest['homepage'], 'license': 'CC-BY-NC-SA-4.0'}
-    result = {'LICENSE': (ROOT / 'LICENSE').read_bytes()}
+    result = {'LICENSE': package_bytes((ROOT / 'LICENSE').read_bytes())}
     if host == 'codex':
-        result['.codex-plugin/plugin.json'] = (ROOT / '.codex-plugin/plugin.json').read_bytes()
+        result['.codex-plugin/plugin.json'] = package_bytes((ROOT / '.codex-plugin/plugin.json').read_bytes())
     else:
         result['.claude-plugin/plugin.json'] = (json.dumps(metadata, indent=2) + '\n').encode()
     for skill in sorted((ROOT / 'skills').iterdir()):
@@ -57,7 +69,7 @@ def expected_files(host):
         for path in sorted(skill.rglob('*')):
             if not path.is_file() or '__pycache__' in path.parts or path.suffix == '.pyc':
                 continue
-            content = path.read_bytes()
+            content = package_bytes(path.read_bytes())
             if path.name == 'SKILL.md' and host == 'claude':
                 text = path.read_text(encoding='utf-8')
                 assert text.startswith('---\n'), path
@@ -74,7 +86,8 @@ def build(check=False):
         actual = {p.relative_to(target).as_posix(): p for p in target.rglob('*') if p.is_file()}
         if check:
             assert set(actual) == set(expected), f'{host} package inventory differs from generator'
-            assert all(actual[n].read_bytes() == data for n, data in expected.items()), f'{host} package content drift'
+            differences = [n for n, data in expected.items() if actual[n].read_bytes() != data]
+            assert not differences, f'{host} package content drift: {differences[:5]}'
         else:
             # Only remove generated files; root skills and history remain intact.
             for name in actual.keys() - expected.keys():
