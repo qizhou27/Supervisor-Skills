@@ -23,11 +23,11 @@ codex plugin add supervisor-skills@supervisor-skills-local
 
 ## 上游同步
 
-**Check upstream** 每天计划在新加坡时间 09:23 只读检查一次，GitHub 可能延迟执行，也可手动触发。三方合并以 `.upstream/state.json` 的提交为共同基线。云端只将提交、变更数量和冲突写入运行摘要，job 仅有 `contents: read`，不需要 Actions 创建或批准 PR 的仓库权限。
+用户选择手动更新，未启用定时检测或定时发布。需要时在 GitHub Actions 手动运行 **Check upstream**，三方合并以 `.upstream/state.json` 的提交为共同基线。云端只将提交、变更数量和冲突写入运行摘要，job 仅有 `contents: read`，不需要 Actions 创建或批准 PR 的仓库权限。
 
 本地 Codex 维护以最新上游创建候选 PR，成功同步时递增包装版本并同步两个 manifest 与 marketplace。上游明确删除的文件和技能会跟随删除；文本交叠或二进制冲突生成报告，此时插件内容和同步基线保持原样。`.upstream/INCOMING.patch` 存在时验证必须失败。自动维护需解决冲突、保留调用边界、更新版本和基线，再移除该补丁并重跑检查。
 
-本账号的 Codex 日常维护在新加坡时间 09:40 自动审阅、补齐双端适配、验证并发布常规更新到 `main`，使客户端 Upgrade 可以获取新版。技能集合跟随上游，新增技能须自动补齐显式调用策略。此维护需要本地 Codex 可运行；无法验证的变更保留当前稳定版并报告。
+由用户发起一次 Codex 同步后，维护过程审阅、补齐双端适配、验证并发布到 `main`。技能集合跟随上游，新增技能须补齐显式调用策略。无法验证的变更保留当前稳定版并报告。没有持续自动合并任务；客户端 Upgrade 只获取本适配仓库已发布的版本，上游变更需要先同步适配与发布。
 
 ```text
 python -m pip install -r requirements-lint.txt
