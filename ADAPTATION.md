@@ -7,7 +7,7 @@ Codex 延续原来的 `supervisor-skills-local` marketplace 名称。每个技�
 ## 安装已审阅版本
 
 ```text
-codex plugin marketplace add qizhou27/Supervisor-Skills --ref main
+codex plugin marketplace add qizhou27/Supervisor-Skills
 codex plugin marketplace upgrade supervisor-skills-local
 codex plugin add supervisor-skills@supervisor-skills-local
 ```
